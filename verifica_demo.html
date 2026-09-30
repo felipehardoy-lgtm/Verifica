@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verifica — Prototipo</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#f5f7fb,#0d1117);
+  --surface: light-dark(#ffffff,#161b22);
+  --surface2: light-dark(#f0f3f8,#21262d);
+  --text: light-dark(#172033,#f0f6fc);
+  --muted: light-dark(#64748b,#9da7b3);
+  --border: light-dark(#dbe2ea,#30363d);
+  --primary: light-dark(#315bea,#6f8cff);
+  --primary2: light-dark(#edf1ff,#1c2a55);
+  --good: #15803d;
+  --warn: #b45309;
+  --bad: #b91c1c;
+  --shadow: 0 16px 45px rgba(20,30,55,.10);
+}
+* { box-sizing: border-box; }
+body { margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:var(--bg); color:var(--text); }
+#app { min-height:100vh; background:var(--bg); }
+button,input,textarea { font:inherit; }
+button { cursor:pointer; }
+.top { padding:22px 7vw 8px; display:flex; justify-content:space-between; align-items:center; }
+.brand { display:flex; align-items:center; gap:12px; font-weight:800; font-size:22px; letter-spacing:-.5px; }
+.logo { width:38px; height:38px; border-radius:12px; display:grid; place-items:center; background:var(--primary); color:white; font-weight:900; }
+.user { color:var(--muted); font-size:14px; }
+.page { width:min(1060px, 90vw); margin:40px auto 70px; }
+.hero { text-align:center; margin-bottom:34px; }
+.eyebrow { color:var(--primary); font-weight:800; font-size:13px; text-transform:uppercase; letter-spacing:1.3px; }
+h1 { font-size:clamp(34px,6vw,58px); line-height:1.03; margin:10px 0 13px; letter-spacing:-2.5px; }
+.hero p { max-width:690px; margin:auto; color:var(--muted); font-size:17px; line-height:1.6; }
+.card { background:var(--surface); border:1px solid var(--border); border-radius:24px; box-shadow:var(--shadow); }
+.login { width:min(430px,100%); margin:45px auto; padding:30px; }
+.login h2 { margin:0 0 7px; }
+.login p { color:var(--muted); margin-top:0; }
+.field { margin:18px 0; }
+label { display:block; font-size:13px; font-weight:700; margin-bottom:8px; }
+input,textarea { width:100%; border:1px solid var(--border); background:var(--surface); color:var(--text); border-radius:14px; padding:13px 14px; outline:none; }
+input:focus,textarea:focus { border-color:var(--primary); box-shadow:0 0 0 3px var(--primary2); }
+.primary { border:0; background:var(--primary); color:white; border-radius:13px; padding:13px 18px; font-weight:800; width:100%; }
+.secondary { border:1px solid var(--border); background:var(--surface); color:var(--text); border-radius:13px; padding:11px 15px; font-weight:700; }
+.demo-note { margin-top:16px; padding:12px; border-radius:12px; background:var(--surface2); color:var(--muted); font-size:12px; line-height:1.5; }
+.hidden { display:none !important; }
+.tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+.tab { border:1px solid var(--border); background:var(--surface); color:var(--muted); padding:10px 15px; border-radius:999px; font-weight:750; }
+.tab.active { background:var(--primary2); color:var(--primary); border-color:transparent; }
+.workspace { padding:26px; }
+textarea { min-height:175px; resize:vertical; line-height:1.55; }
+.drop { border:1.5px dashed var(--border); border-radius:18px; padding:35px 20px; text-align:center; color:var(--muted); }
+.drop strong { display:block; color:var(--text); margin-bottom:6px; }
+.actions { display:flex; gap:10px; margin-top:16px; }
+.actions .primary { width:auto; flex:1; }
+.result { margin-top:22px; padding:22px; border:1px solid var(--border); border-radius:18px; background:var(--surface2); }
+.verdict { display:flex; align-items:center; gap:12px; }
+.dot { width:14px; height:14px; border-radius:50%; }
+.good { color:var(--good); } .good .dot { background:var(--good); }
+.warn { color:var(--warn); } .warn .dot { background:var(--warn); }
+.bad { color:var(--bad); } .bad .dot { background:var(--bad); }
+.result h3 { margin:0; font-size:24px; }
+.confidence { margin:14px 0 18px; }
+.bar { height:8px; border-radius:99px; background:var(--border); overflow:hidden; }
+.bar i { display:block; height:100%; background:var(--primary); border-radius:99px; }
+.sources { margin-top:18px; }
+.source { display:flex; justify-content:space-between; gap:15px; padding:13px 0; border-top:1px solid var(--border); }
+.source b { display:block; }
+.source span { color:var(--muted); font-size:13px; }
+.badge { font-size:11px; font-weight:800; padding:5px 8px; border-radius:999px; background:var(--primary2); color:var(--primary); white-space:nowrap; }
+.footer-note { color:var(--muted); text-align:center; font-size:12px; margin-top:25px; line-height:1.5; }
+.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:25px; }
+.step { padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:18px; }
+.step strong { display:block; margin-bottom:6px; }
+.step p { margin:0; color:var(--muted); font-size:13px; line-height:1.45; }
+@media(max-width:700px){ .top{padding:18px 5vw}.page{width:92vw}.workspace{padding:18px}.steps{grid-template-columns:1fr}.actions{flex-direction:column}.actions .primary{width:100%} }
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <div class="brand"><div class="logo">✓</div> Verifica</div>
+    <div id="user" class="user hidden"></div>
+  </header>
+
+  <main class="page">
+    <section id="loginView">
+      <div class="hero">
+        <div class="eyebrow">Prototipo escolar</div>
+        <h1>Antes de compartir,<br>verificá.</h1>
+        <p>Una herramienta sencilla para analizar noticias, textos, enlaces y contenido que podría haber sido generado o manipulado con IA.</p>
+      </div>
+      <div class="card login">
+        <h2>Crear una cuenta</h2>
+        <p>Ingresá con tu Gmail para comenzar.</p>
+        <div class="field"><label>Nombre</label><input id="name" placeholder="Tu nombre"></div>
+        <div class="field"><label>Gmail</label><input id="email" type="email" placeholder="nombre@gmail.com"></div>
+        <button class="primary" onclick="login()">Continuar con Gmail</button>
+        <div class="demo-note">En este prototipo escolar el registro es simulado. Para una versión real se conectaría con Google Sign-In/Firebase.</div>
+      </div>
+    </section>
+
+    <section id="appView" class="hidden">
+      <div class="hero">
+        <div class="eyebrow">Panel de verificación</div>
+        <h1>¿Es verdad o no?</h1>
+        <p>Pegá un enlace o texto. También podés seleccionar un PDF como demostración del funcionamiento.</p>
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="setMode('text',this)">Texto / noticia</button>
+        <button class="tab" onclick="setMode('link',this)">🔗 Link</button>
+        <button class="tab" onclick="setMode('pdf',this)">📄 PDF</button>
+      </div>
+      <div class="card workspace">
+        <div id="textMode">
+          <label for="content">Información a verificar</label>
+          <textarea id="content" placeholder="Pegá acá una noticia, publicación o afirmación..."></textarea>
+        </div>
+        <div id="linkMode" class="hidden">
+          <label for="link">Link de la publicación</label>
+          <input id="link" placeholder="https://...">
+        </div>
+        <div id="pdfMode" class="hidden">
+          <div class="drop"><strong>📄 Seleccioná un PDF</strong>El prototipo muestra el flujo de carga. En una versión real, el PDF sería leído y analizado.</div>
+        </div>
+        <div class="actions">
+          <button class="secondary" onclick="loadExample()">Probar ejemplo</button>
+          <button class="primary" onclick="analyze()">Analizar información</button>
+        </div>
+        <div id="result" class="result hidden"></div>
+      </div>
+      <div class="steps">
+        <div class="step"><strong>1. Recibir</strong><p>El usuario pega un link, texto o documento.</p></div>
+        <div class="step"><strong>2. Comparar</strong><p>El sistema busca coincidencias y contrasta fuentes confiables.</p></div>
+        <div class="step"><strong>3. Explicar</strong><p>Devuelve un resultado acompañado de fuentes y una explicación.</p></div>
+      </div>
+      <div class="footer-note">Importante: una herramienta automática no puede garantizar que algo sea verdadero o falso. El resultado debe servir como ayuda para verificar, no como prueba definitiva.</div>
+    </section>
+  </main>
+</div>
+<script>
+let mode='text';
+function login(){
+  const n=document.getElementById('name').value.trim() || 'Usuario';
+  const e=document.getElementById('email').value.trim();
+  if(!e || !e.includes('@')){ alert('Ingresá un Gmail válido para continuar.'); return; }
+  document.getElementById('loginView').classList.add('hidden');
+  document.getElementById('appView').classList.remove('hidden');
+  const u=document.getElementById('user'); u.textContent=n+' · '+e; u.classList.remove('hidden');
+}
+function setMode(m,el){
+  mode=m;
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active')); el.classList.add('active');
+  ['textMode','linkMode','pdfMode'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+  document.getElementById(m==='text'?'textMode':m==='link'?'linkMode':'pdfMode').classList.remove('hidden');
+  document.getElementById('result').classList.add('hidden');
+}
+function loadExample(){
+  if(mode==='text') document.getElementById('content').value='URGENTE: científicos confirmaron que tomar agua con limón elimina todos los virus del cuerpo. Compartí antes de que borren esta publicación.';
+  if(mode==='link') document.getElementById('link').value='https://ejemplo.com/noticia-viral';
+  analyze();
+}
+function analyze(){
+  const result=document.getElementById('result'); result.classList.remove('hidden');
+  const input=mode==='text'?document.getElementById('content').value.trim():mode==='link'?document.getElementById('link').value.trim():'PDF seleccionado';
+  if(!input){ result.innerHTML='<b>Falta información.</b><p>Agregá un texto o enlace para comenzar.</p>'; return; }
+  const lower=input.toLowerCase();
+  let type='warn', title='Dudoso / requiere revisión', conf=58, explanation='No alcanza con el contenido recibido para confirmar la afirmación. Conviene contrastarla con fuentes independientes.';
+  if(lower.includes('elimina todos los virus') || lower.includes('urgente')){ type='bad'; title='Probablemente falso'; conf=91; explanation='La afirmación usa una generalización absoluta y lenguaje de urgencia. El sistema la marcaría para contrastarla con fuentes científicas y de verificación.'; }
+  else if(lower.includes('ejemplo.com')){ type='warn'; title='No se pudo comprobar'; conf=43; explanation='El prototipo no tiene acceso a internet. En una versión real, este enlace se compararía con fuentes y bases de datos de verificación.'; }
+  result.innerHTML=`<div class="verdict ${type}"><div class="dot"></div><h3>${title}</h3></div>
+  <div class="confidence"><span><b>Nivel de coincidencia/certeza del análisis:</b> ${conf}%</span><div class="bar"><i style="width:${conf}%"></i></div></div>
+  <p>${explanation}</p>
+  <div class="sources"><b>Fuentes que debería consultar</b>
+    <div class="source"><div><b>Google Fact Check Tools</b><span>Base de datos de verificaciones publicadas.</span></div><span class="badge">Verificación</span></div>
+    <div class="source"><div><b>Reuters Fact Check</b><span>Verificación y contexto de afirmaciones virales.</span></div><span class="badge">Noticias</span></div>
+    <div class="source"><div><b>AFP Factual</b><span>Verificación de contenidos y desinformación.</span></div><span class="badge">Noticias</span></div>
+  </div>`;
+}
+</script>
+</body>
+</html>
