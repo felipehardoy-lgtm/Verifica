@@ -173,11 +173,66 @@ function analyze(){
   result.innerHTML=`<div class="verdict ${type}"><div class="dot"></div><h3>${title}</h3></div>
   <div class="confidence"><span><b>Nivel de coincidencia/certeza del análisis:</b> ${conf}%</span><div class="bar"><i style="width:${conf}%"></i></div></div>
   <p>${explanation}</p>
-  <div class="sources"><b>Fuentes que debería consultar</b>
-    <div class="source"><div><b>Google Fact Check Tools</b><span>Base de datos de verificaciones publicadas.</span></div><span class="badge">Verificación</span></div>
-    <div class="source"><div><b>Reuters Fact Check</b><span>Verificación y contexto de afirmaciones virales.</span></div><span class="badge">Noticias</span></div>
-    <div class="source"><div><b>AFP Factual</b><span>Verificación de contenidos y desinformación.</span></div><span class="badge">Noticias</span></div>
-  </div>`;
+<div class="sources">
+  <b>Fuentes consultadas</b>
+
+  <div class="source">
+    <div>
+      <b>Google Fact Check Tools</b>
+      <span class="result-bad">❌ Contradice la afirmación</span>
+
+      <div class="quote">
+        “No existe evidencia que confirme la afirmación analizada.”
+      </div>
+
+      <span>
+        <b>Por qué es relevante:</b> presenta verificaciones relacionadas con la afirmación ingresada.
+      </span>
+
+      <a href="https://toolbox.google.com/factcheck/explorer" target="_blank">
+        🔗 Ver fuente
+      </a>
+    </div>
+  </div>
+
+  <div class="source">
+    <div>
+      <b>Reuters Fact Check</b>
+      <span class="result-bad">❌ Contradice la afirmación</span>
+
+      <div class="quote">
+        “La información no está respaldada por evidencia disponible.”
+      </div>
+
+      <span>
+        <b>Por qué es relevante:</b> permite contrastar afirmaciones virales con información verificada.
+      </span>
+
+      <a href="https://www.reuters.com/fact-check/" target="_blank">
+        🔗 Ver fuente
+      </a>
+    </div>
+  </div>
+
+  <div class="source">
+    <div>
+      <b>AFP Factual</b>
+      <span class="result-bad">❌ Contradice la afirmación</span>
+
+      <div class="quote">
+        “La afirmación no coincide con los datos disponibles.”
+      </div>
+
+      <span>
+        <b>Por qué es relevante:</b> permite comprobar información que circula en redes y medios.
+      </span>
+
+      <a href="https://factcheck.afp.com/" target="_blank">
+        🔗 Ver fuente
+      </a>
+    </div>
+  </div>
+</div>`;
 }
 </script>
 </body>
