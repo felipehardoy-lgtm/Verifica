@@ -5,12 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Verifica — Prototipo escolar</title>
 <style>
-:root{
-  color-scheme:dark;
-  --bg:#0d1117;--surface:#161b22;--surface2:#21262d;
-  --text:#f0f6fc;--muted:#9da7b3;--border:#30363d;
-  --primary:#6f8cff;--primary2:#1c2a55;
-}
+:root{color-scheme:dark;--bg:#0d1117;--surface:#161b22;--surface2:#21262d;--text:#f0f6fc;--muted:#9da7b3;--border:#30363d;--primary:#6f8cff;--primary2:#1c2a55}
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
 .top{padding:22px 7vw 8px;display:flex;justify-content:space-between;align-items:center}
@@ -54,213 +49,112 @@ button:hover{filter:brightness(1.08)}
 .step p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
 .footer-note{color:var(--muted);text-align:center;font-size:12px;margin-top:25px;line-height:1.5}
 .file-help{color:var(--muted);font-size:13px;margin-top:10px}
-@media(max-width:700px){
- .top{padding:18px 5vw}.page{width:92vw;margin-top:25px}
- .workspace{padding:18px}.steps{grid-template-columns:1fr}
- .actions{flex-direction:column}.source{align-items:flex-start;flex-direction:column}
-}
+@media(max-width:700px){.top{padding:18px 5vw}.page{width:92vw;margin-top:25px}.workspace{padding:18px}.steps{grid-template-columns:1fr}.actions{flex-direction:column}.source{align-items:flex-start;flex-direction:column}}
 </style>
 </head>
 <body>
-<header class="top">
-  <div class="brand"><div class="logo">✓</div>Verifica</div>
-  <div class="tag">Prototipo escolar</div>
-</header>
+<header class="top"><div class="brand"><div class="logo">✓</div>Verifica</div><div class="tag">Prototipo escolar</div></header>
 <main class="page">
-  <section class="hero">
-    <div class="eyebrow">Antes de compartir, verificá</div>
-    <h1>¿Qué información<br>querés comprobar?</h1>
-    <p>Ingresá una afirmación, un enlace o un documento. Verifica te ayuda a encontrar búsquedas relacionadas en fuentes de verificación y otros sitios.</p>
-  </section>
-  <section class="card workspace">
-    <div class="tabs" aria-label="Tipo de contenido">
-      <button class="tab active" id="textTab" type="button" aria-pressed="true">Texto / noticia</button>
-      <button class="tab" id="linkTab" type="button" aria-pressed="false">🔗 Link</button>
-      <button class="tab" id="pdfTab" type="button" aria-pressed="false">📄 PDF</button>
-    </div>
-    <div id="textMode">
-      <label for="claim">Información a verificar</label>
-      <textarea id="claim" placeholder="Pegá acá una noticia, publicación o afirmación..."></textarea>
-    </div>
-    <div id="linkMode" class="hidden">
-      <label for="url">Enlace de la publicación</label>
-      <input id="url" type="url" placeholder="https://...">
-      <p class="file-help">Pegá el enlace completo de la publicación que querés investigar.</p>
-    </div>
-    <div id="pdfMode" class="hidden">
-      <label for="pdfFile">Seleccionar documento PDF</label>
-      <input id="pdfFile" type="file" accept="application/pdf,.pdf">
-      <p class="file-help">En esta versión todavía no podemos leer automáticamente el contenido del PDF. Podés copiar el texto del documento y pegarlo en la pestaña Texto / noticia.</p>
-    </div>
-    <div class="actions">
-      <button class="secondary" id="exampleButton" type="button">Probar ejemplo</button>
-      <button class="primary" id="searchButton" type="button">Buscar verificaciones</button>
-    </div>
-    <section id="results" class="results hidden" aria-live="polite">
-      <div class="status">Información pendiente de verificación</div>
-      <p id="resultIntro"></p>
-      <h2>Búsquedas para consultar</h2>
-      <div class="source-list" id="sourceList"></div>
-      <div class="note"><b>Importante:</b> estos enlaces abren búsquedas en Google usando palabras clave más cortas. Verifica todavía no consulta directamente los artículos ni determina automáticamente si una afirmación es verdadera o falsa. Una búsqueda sin resultados no demuestra que algo sea verdadero o falso.</div>
-    </section>
-  </section>
-  <section class="steps">
-    <div class="step"><strong>1. Recibir</strong><p>El usuario pega un link, texto o selecciona un documento.</p></div>
-    <div class="step"><strong>2. Buscar</strong><p>Se generan consultas más simples en fuentes de verificación y otros sitios.</p></div>
-    <div class="step"><strong>3. Comparar</strong><p>Se revisan las publicaciones encontradas y sus pruebas antes de sacar una conclusión.</p></div>
-  </section>
-  <div class="footer-note">Verifica es una herramienta de ayuda para investigar información. Los resultados de búsqueda deben revisarse antes de llegar a una conclusión.</div>
+<section class="hero">
+<div class="eyebrow">Antes de compartir, verificá</div>
+<h1>¿Qué información<br>querés comprobar?</h1>
+<p>Ingresá una afirmación, un enlace o un documento. Verifica te ayuda a encontrar búsquedas relacionadas en fuentes de verificación y otros sitios.</p>
+</section>
+<section class="card workspace">
+<div class="tabs" aria-label="Tipo de contenido">
+<button class="tab active" id="textTab" type="button" aria-pressed="true">Texto / noticia</button>
+<button class="tab" id="linkTab" type="button" aria-pressed="false">🔗 Link</button>
+<button class="tab" id="pdfTab" type="button" aria-pressed="false">📄 PDF</button>
+</div>
+<div id="textMode"><label for="claim">Información a verificar</label><textarea id="claim" placeholder="Pegá acá una noticia, publicación o afirmación..."></textarea></div>
+<div id="linkMode" class="hidden"><label for="url">Enlace de la publicación</label><input id="url" type="url" placeholder="https://..."><p class="file-help">Pegá el enlace completo de la publicación que querés investigar.</p></div>
+<div id="pdfMode" class="hidden"><label for="pdfFile">Seleccionar documento PDF</label><input id="pdfFile" type="file" accept="application/pdf,.pdf"><p class="file-help">En esta versión todavía no podemos leer automáticamente el contenido del PDF. Podés copiar el texto del documento y pegarlo en la pestaña Texto / noticia.</p></div>
+<div class="actions"><button class="secondary" id="exampleButton" type="button">Probar ejemplo</button><button class="primary" id="searchButton" type="button">Buscar verificaciones</button></div>
+<section id="results" class="results hidden" aria-live="polite">
+<div class="status">Información pendiente de verificación</div>
+<p id="resultIntro"></p>
+<h2>Búsquedas para consultar</h2>
+<div class="source-list" id="sourceList"></div>
+<div class="note"><b>Importante:</b> estos enlaces abren búsquedas en Google. Verifica todavía no consulta directamente los artículos ni determina automáticamente si una afirmación es verdadera o falsa. Una búsqueda sin resultados no demuestra que algo sea verdadero o falso.</div>
+</section>
+</section>
+<section class="steps">
+<div class="step"><strong>1. Recibir</strong><p>El usuario pega un link, texto o selecciona un documento.</p></div>
+<div class="step"><strong>2. Buscar</strong><p>Se generan consultas más simples en fuentes de verificación y otros sitios.</p></div>
+<div class="step"><strong>3. Comparar</strong><p>Se revisan las publicaciones encontradas y sus pruebas antes de sacar una conclusión.</p></div>
+</section>
+<div class="footer-note">Verifica es una herramienta de ayuda para investigar información. Los resultados de búsqueda deben revisarse antes de llegar a una conclusión.</div>
 </main>
 <script>
-const textTab = document.getElementById('textTab');
-const linkTab = document.getElementById('linkTab');
-const pdfTab = document.getElementById('pdfTab');
-const textMode = document.getElementById('textMode');
-const linkMode = document.getElementById('linkMode');
-const pdfMode = document.getElementById('pdfMode');
-const claimInput = document.getElementById('claim');
-const urlInput = document.getElementById('url');
-const pdfInput = document.getElementById('pdfFile');
-const results = document.getElementById('results');
-const resultIntro = document.getElementById('resultIntro');
-const sourceList = document.getElementById('sourceList');
-let mode = 'text';
+const textTab=document.getElementById('textTab'),linkTab=document.getElementById('linkTab'),pdfTab=document.getElementById('pdfTab');
+const textMode=document.getElementById('textMode'),linkMode=document.getElementById('linkMode'),pdfMode=document.getElementById('pdfMode');
+const claimInput=document.getElementById('claim'),urlInput=document.getElementById('url'),pdfInput=document.getElementById('pdfFile');
+const results=document.getElementById('results'),resultIntro=document.getElementById('resultIntro'),sourceList=document.getElementById('sourceList');
+let mode='text';
 
-function setMode(nextMode) {
-  mode = nextMode;
-  textMode.classList.toggle('hidden', mode !== 'text');
-  linkMode.classList.toggle('hidden', mode !== 'link');
-  pdfMode.classList.toggle('hidden', mode !== 'pdf');
-  textTab.classList.toggle('active', mode === 'text');
-  linkTab.classList.toggle('active', mode === 'link');
-  pdfTab.classList.toggle('active', mode === 'pdf');
-  textTab.setAttribute('aria-pressed', String(mode === 'text'));
-  linkTab.setAttribute('aria-pressed', String(mode === 'link'));
-  pdfTab.setAttribute('aria-pressed', String(mode === 'pdf'));
-  results.classList.add('hidden');
+function setMode(nextMode){
+ mode=nextMode;
+ textMode.classList.toggle('hidden',mode!=='text');linkMode.classList.toggle('hidden',mode!=='link');pdfMode.classList.toggle('hidden',mode!=='pdf');
+ textTab.classList.toggle('active',mode==='text');linkTab.classList.toggle('active',mode==='link');pdfTab.classList.toggle('active',mode==='pdf');
+ textTab.setAttribute('aria-pressed',String(mode==='text'));linkTab.setAttribute('aria-pressed',String(mode==='link'));pdfTab.setAttribute('aria-pressed',String(mode==='pdf'));
+ results.classList.add('hidden');
 }
-textTab.addEventListener('click', () => setMode('text'));
-linkTab.addEventListener('click', () => setMode('link'));
-pdfTab.addEventListener('click', () => setMode('pdf'));
-
-document.getElementById('exampleButton').addEventListener('click', () => {
-  setMode('text');
-  claimInput.value = 'URGENTE: científicos confirmaron que tomar agua con limón elimina todos los virus del cuerpo. Compartí antes de que borren esta publicación.';
-  claimInput.focus();
+textTab.addEventListener('click',()=>setMode('text'));linkTab.addEventListener('click',()=>setMode('link'));pdfTab.addEventListener('click',()=>setMode('pdf'));
+document.getElementById('exampleButton').addEventListener('click',()=>{
+ setMode('text');
+ claimInput.value='URGENTE: científicos confirmaron que tomar agua con limón elimina todos los virus del cuerpo. Compartí antes de que borren esta publicación.';
+ claimInput.focus();
 });
 
-// Quita palabras de relleno y expresiones virales para buscar los conceptos centrales.
-function extractKeywords(text) {
-  const ignored = new Set([
-    'urgente','ultima','última','hora','comparti','compartí','compartan','compartir',
-    'antes','borren','borrar','publicacion','publicación','viral','confirmaron',
-    'confirman','cientificos','científicos','cientifico','científico','segun','según',
-    'dicen','afirma','afirmaron','noticia','increible','increíble','todos','todas',
-    'todo','toda','este','esta','estos','estas','para','porque','pero','como',
-    'sobre','desde','hasta','entre','donde','cuando','quien','quienes','cual',
-    'cuales','que','con','sin','del','las','los','una','uno','unos','unas',
-    'por','sus','son','ser','fue','han','hay','muy','más','mas','tambien',
-    'también','puede','pueden','debe','deben','el','la','lo','y','o','a','en',
-    'un','es','se','al'
-  ]);
-
-  const words = (text.toLocaleLowerCase('es').match(/[a-záéíóúüñ]{3,}/g) || [])
-    .filter(word => !ignored.has(word));
-
-  const unique = [...new Set(words)];
-  // Se conservan hasta 6 conceptos para evitar consultas excesivamente largas.
-  return unique.slice(0, 6).join(' ');
+function extractKeywords(text){
+ const ignored=new Set(['urgente','ultima','última','hora','comparti','compartí','compartan','compartir','antes','borren','borrar','publicacion','publicación','viral','confirmaron','confirman','cientificos','científicos','cientifico','científico','segun','según','dicen','afirma','afirmaron','noticia','increible','increíble','todos','todas','todo','toda','este','esta','estos','estas','para','porque','pero','como','sobre','desde','hasta','entre','donde','cuando','quien','quienes','cual','cuales','que','con','sin','del','las','los','una','uno','unos','unas','por','sus','son','ser','fue','han','hay','muy','más','mas','tambien','también','puede','pueden','debe','deben','el','la','lo','y','o','a','en','un','es','se','al']);
+ const words=(text.toLocaleLowerCase('es').match(/[a-záéíóúüñ]{3,}/g)||[]).filter(word=>!ignored.has(word));
+ return [...new Set(words)].slice(0,6).join(' ');
 }
-
-function googleSearchUrl(query, site) {
-  const searchText = site ? `site:${site} ${query}` : query;
-  return 'https://www.google.com/search?q=' + encodeURIComponent(searchText);
+function googleSearchUrl(query){return 'https://www.google.com/search?q='+encodeURIComponent(query);}
+function addSource(name,description,url){
+ const card=document.createElement('div');card.className='source';
+ const info=document.createElement('div'),title=document.createElement('b'),detail=document.createElement('span');
+ title.textContent=name;detail.textContent=description;info.append(title,detail);
+ const anchor=document.createElement('a');anchor.href=url;anchor.target='_blank';anchor.rel='noopener noreferrer';anchor.textContent='Buscar información ↗';
+ card.append(info,anchor);sourceList.append(card);
 }
-
-function addSource(name, description, url) {
-  const card = document.createElement('div');
-  card.className = 'source';
-  const info = document.createElement('div');
-  const title = document.createElement('b');
-  title.textContent = name;
-  const detail = document.createElement('span');
-  detail.textContent = description;
-  info.append(title, detail);
-  const anchor = document.createElement('a');
-  anchor.href = url;
-  anchor.target = '_blank';
-  anchor.rel = 'noopener noreferrer';
-  anchor.textContent = 'Buscar información ↗';
-  card.append(info, anchor);
-  sourceList.append(card);
+function getLinkSearchTerms(rawUrl){
+ try{
+  const parsed=new URL(rawUrl);
+  const pathWords=decodeURIComponent(parsed.pathname).replace(/[-_/]+/g,' ').replace(/\.[a-z0-9]+$/i,'');
+  const hostWords=parsed.hostname.replace(/^www\./,'').replace(/\.(com|org|net|ar)$/i,'');
+  return extractKeywords(hostWords+' '+pathWords)||parsed.hostname;
+ }catch{return rawUrl;}
 }
-
-function getLinkSearchTerms(rawUrl) {
-  try {
-    const parsed = new URL(rawUrl);
-    const pathWords = decodeURIComponent(parsed.pathname)
-      .replace(/[-_/]+/g, ' ')
-      .replace(/\.[a-z0-9]+$/i, '');
-    const hostWords = parsed.hostname.replace(/^www\./, '').replace(/\.(com|org|net|ar)$/i, '');
-    return extractKeywords(hostWords + ' ' + pathWords) || parsed.hostname;
-  } catch {
-    return rawUrl;
-  }
-}
-
-document.getElementById('searchButton').addEventListener('click', () => {
-  let originalInput = '';
-  let query = '';
-
-  if (mode === 'text') {
-    originalInput = claimInput.value.trim();
-    if (!originalInput) {
-      alert('Primero pegá una noticia o afirmación.');
-      return;
-    }
-    query = extractKeywords(originalInput);
-    if (!query) query = originalInput.slice(0, 100);
-  } else if (mode === 'link') {
-    originalInput = urlInput.value.trim();
-    if (!originalInput) {
-      alert('Primero pegá un enlace.');
-      return;
-    }
-    try {
-      const parsed = new URL(originalInput);
-      if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error('URL no válida');
-    } catch {
-      alert('Ingresá un enlace válido que comience con https:// o http://');
-      return;
-    }
-    query = getLinkSearchTerms(originalInput);
-  } else {
-    if (!pdfInput.files || !pdfInput.files.length) {
-      alert('Primero seleccioná un archivo PDF.');
-      return;
-    }
-    results.classList.remove('hidden');
-    resultIntro.textContent = 'Seleccionaste "' + pdfInput.files[0].name + '". Esta versión todavía no puede extraer ni analizar el texto del PDF. Copiá el contenido y pegalo en la pestaña Texto / noticia.';
-    sourceList.replaceChildren();
-    results.scrollIntoView({behavior:'smooth', block:'start'});
-    return;
-  }
-
-  resultIntro.textContent = mode === 'link'
-    ? 'Enlace ingresado: ' + originalInput + '. Se buscarán palabras del dominio y del nombre de la página; Verifica todavía no puede leer el artículo directamente.'
-    : 'Afirmación ingresada: ' + originalInput + '. Para evitar búsquedas demasiado largas, Verifica seleccionó estas palabras clave: "' + query + '".';
-
-  sourceList.replaceChildren();
-  addSource('Chequeado', 'Buscar estas palabras clave dentro de Chequeado.', googleSearchUrl(query, 'chequeado.com'));
-  addSource('AFP Factual', 'Buscar estas palabras clave dentro de AFP Factual.', googleSearchUrl(query, 'factcheck.afp.com'));
-  addSource('Reuters Fact Check', 'Buscar estas palabras clave dentro de Reuters.', googleSearchUrl(query, 'reuters.com'));
-  addSource('Google Fact Check Explorer', 'Buscar verificaciones relacionadas con estas palabras.', googleSearchUrl(query + ' fact check'));
-  addSource('Búsqueda general', 'Buscar información relacionada en toda la web.', googleSearchUrl(query));
-
+document.getElementById('searchButton').addEventListener('click',()=>{
+ let originalInput='',query='';
+ if(mode==='text'){
+  originalInput=claimInput.value.trim();
+  if(!originalInput){alert('Primero pegá una noticia o afirmación.');return;}
+  query=extractKeywords(originalInput)||originalInput.slice(0,100);
+ }else if(mode==='link'){
+  originalInput=urlInput.value.trim();
+  if(!originalInput){alert('Primero pegá un enlace.');return;}
+  try{const parsed=new URL(originalInput);if(!['http:','https:'].includes(parsed.protocol))throw new Error();}
+  catch{alert('Ingresá un enlace válido que comience con https:// o http://');return;}
+  query=getLinkSearchTerms(originalInput);
+ }else{
+  if(!pdfInput.files||!pdfInput.files.length){alert('Primero seleccioná un archivo PDF.');return;}
   results.classList.remove('hidden');
-  results.scrollIntoView({behavior:'smooth', block:'start'});
+  resultIntro.textContent='Seleccionaste "'+pdfInput.files[0].name+'". Esta versión todavía no puede extraer ni analizar el texto del PDF. Copiá el contenido y pegalo en la pestaña Texto / noticia.';
+  sourceList.replaceChildren();results.scrollIntoView({behavior:'smooth',block:'start'});return;
+ }
+ resultIntro.textContent=mode==='link'
+  ?'Enlace ingresado: '+originalInput+'. Se buscarán palabras del dominio y del nombre de la página; Verifica todavía no puede leer el artículo directamente.'
+  :'Afirmación ingresada: '+originalInput+'. Palabras clave seleccionadas: "'+query+'".';
+ sourceList.replaceChildren();
+ // Búsquedas más amplias: no se limita a una frase exacta ni solo a una URL interna.
+ addSource('Búsqueda general','Buscar los conceptos principales en toda la web.',googleSearchUrl(query));
+ addSource('Chequeado','Buscar artículos de Chequeado que traten este tema.',googleSearchUrl('Chequeado '+query));
+ addSource('AFP Factual','Buscar verificaciones de AFP relacionadas con este tema.',googleSearchUrl('AFP Factual '+query));
+ results.classList.remove('hidden');results.scrollIntoView({behavior:'smooth',block:'start'});
 });
 </script>
 </body>
 </html>
-
