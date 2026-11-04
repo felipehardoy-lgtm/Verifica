@@ -40,7 +40,7 @@ button:hover{filter:brightness(1.08)}
 .hidden{display:none!important}
 .results{margin-top:22px;padding:22px;background:var(--surface2);border:1px solid var(--border);border-radius:18px}
 .results h2{font-size:21px;margin:0 0 8px}
-.results p{line-height:1.5}
+.results p{line-height:1.5;overflow-wrap:anywhere}
 .status{font-size:21px;font-weight:850;color:#f0c674;margin:0 0 12px}
 .source-list{display:grid;gap:10px;margin-top:16px}
 .source{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
@@ -66,21 +66,18 @@ button:hover{filter:brightness(1.08)}
   <div class="brand"><div class="logo">✓</div>Verifica</div>
   <div class="tag">Prototipo escolar</div>
 </header>
-
 <main class="page">
   <section class="hero">
     <div class="eyebrow">Antes de compartir, verificá</div>
     <h1>¿Qué información<br>querés comprobar?</h1>
     <p>Ingresá una afirmación, un enlace o un documento. Verifica te ayuda a encontrar búsquedas relacionadas en fuentes de verificación y otros sitios.</p>
   </section>
-
   <section class="card workspace">
     <div class="tabs" aria-label="Tipo de contenido">
       <button class="tab active" id="textTab" type="button" aria-pressed="true">Texto / noticia</button>
       <button class="tab" id="linkTab" type="button" aria-pressed="false">🔗 Link</button>
       <button class="tab" id="pdfTab" type="button" aria-pressed="false">📄 PDF</button>
     </div>
-
     <div id="textMode">
       <label for="claim">Información a verificar</label>
       <textarea id="claim" placeholder="Pegá acá una noticia, publicación o afirmación..."></textarea>
@@ -95,30 +92,25 @@ button:hover{filter:brightness(1.08)}
       <input id="pdfFile" type="file" accept="application/pdf,.pdf">
       <p class="file-help">En esta versión todavía no podemos leer automáticamente el contenido del PDF. Podés copiar el texto del documento y pegarlo en la pestaña Texto / noticia.</p>
     </div>
-
     <div class="actions">
       <button class="secondary" id="exampleButton" type="button">Probar ejemplo</button>
       <button class="primary" id="searchButton" type="button">Buscar verificaciones</button>
     </div>
-
     <section id="results" class="results hidden" aria-live="polite">
       <div class="status">Información pendiente de verificación</div>
       <p id="resultIntro"></p>
-      <h2>Fuentes para consultar</h2>
+      <h2>Búsquedas para consultar</h2>
       <div class="source-list" id="sourceList"></div>
-      <div class="note"><b>Importante:</b> estos enlaces abren búsquedas relacionadas con el texto ingresado. Verifica no consulta directamente las bases de datos de estas organizaciones ni determina automáticamente si una afirmación es verdadera o falsa. Revisá las fechas, las pruebas, el autor y si varias fuentes independientes coinciden.</div>
+      <div class="note"><b>Importante:</b> estos enlaces abren búsquedas en Google usando palabras clave más cortas. Verifica todavía no consulta directamente los artículos ni determina automáticamente si una afirmación es verdadera o falsa. Una búsqueda sin resultados no demuestra que algo sea verdadero o falso.</div>
     </section>
   </section>
-
   <section class="steps">
     <div class="step"><strong>1. Recibir</strong><p>El usuario pega un link, texto o selecciona un documento.</p></div>
-    <div class="step"><strong>2. Comparar</strong><p>Se buscan coincidencias en fuentes de verificación y otros sitios.</p></div>
-    <div class="step"><strong>3. Explicar</strong><p>Se muestran búsquedas para que el usuario compare la información y sus pruebas.</p></div>
+    <div class="step"><strong>2. Buscar</strong><p>Se generan consultas más simples en fuentes de verificación y otros sitios.</p></div>
+    <div class="step"><strong>3. Comparar</strong><p>Se revisan las publicaciones encontradas y sus pruebas antes de sacar una conclusión.</p></div>
   </section>
-
-  <div class="footer-note">Verifica es una herramienta de ayuda para investigar información. Una búsqueda sin resultados no significa que una afirmación sea verdadera o falsa.</div>
+  <div class="footer-note">Verifica es una herramienta de ayuda para investigar información. Los resultados de búsqueda deben revisarse antes de llegar a una conclusión.</div>
 </main>
-
 <script>
 const textTab = document.getElementById('textTab');
 const linkTab = document.getElementById('linkTab');
@@ -157,6 +149,29 @@ document.getElementById('exampleButton').addEventListener('click', () => {
   claimInput.focus();
 });
 
+// Quita palabras de relleno y expresiones virales para buscar los conceptos centrales.
+function extractKeywords(text) {
+  const ignored = new Set([
+    'urgente','ultima','última','hora','comparti','compartí','compartan','compartir',
+    'antes','borren','borrar','publicacion','publicación','viral','confirmaron',
+    'confirman','cientificos','científicos','cientifico','científico','segun','según',
+    'dicen','afirma','afirmaron','noticia','increible','increíble','todos','todas',
+    'todo','toda','este','esta','estos','estas','para','porque','pero','como',
+    'sobre','desde','hasta','entre','donde','cuando','quien','quienes','cual',
+    'cuales','que','con','sin','del','las','los','una','uno','unos','unas',
+    'por','sus','son','ser','fue','han','hay','muy','más','mas','tambien',
+    'también','puede','pueden','debe','deben','el','la','lo','y','o','a','en',
+    'un','es','se','al'
+  ]);
+
+  const words = (text.toLocaleLowerCase('es').match(/[a-záéíóúüñ]{3,}/g) || [])
+    .filter(word => !ignored.has(word));
+
+  const unique = [...new Set(words)];
+  // Se conservan hasta 6 conceptos para evitar consultas excesivamente largas.
+  return unique.slice(0, 6).join(' ');
+}
+
 function googleSearchUrl(query, site) {
   const searchText = site ? `site:${site} ${query}` : query;
   return 'https://www.google.com/search?q=' + encodeURIComponent(searchText);
@@ -180,50 +195,67 @@ function addSource(name, description, url) {
   sourceList.append(card);
 }
 
+function getLinkSearchTerms(rawUrl) {
+  try {
+    const parsed = new URL(rawUrl);
+    const pathWords = decodeURIComponent(parsed.pathname)
+      .replace(/[-_/]+/g, ' ')
+      .replace(/\.[a-z0-9]+$/i, '');
+    const hostWords = parsed.hostname.replace(/^www\./, '').replace(/\.(com|org|net|ar)$/i, '');
+    return extractKeywords(hostWords + ' ' + pathWords) || parsed.hostname;
+  } catch {
+    return rawUrl;
+  }
+}
+
 document.getElementById('searchButton').addEventListener('click', () => {
+  let originalInput = '';
   let query = '';
 
   if (mode === 'text') {
-    query = claimInput.value.trim();
-    if (!query) {
+    originalInput = claimInput.value.trim();
+    if (!originalInput) {
       alert('Primero pegá una noticia o afirmación.');
       return;
     }
+    query = extractKeywords(originalInput);
+    if (!query) query = originalInput.slice(0, 100);
   } else if (mode === 'link') {
-    query = urlInput.value.trim();
-    if (!query) {
+    originalInput = urlInput.value.trim();
+    if (!originalInput) {
       alert('Primero pegá un enlace.');
       return;
     }
     try {
-      const parsed = new URL(query);
+      const parsed = new URL(originalInput);
       if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error('URL no válida');
     } catch {
       alert('Ingresá un enlace válido que comience con https:// o http://');
       return;
     }
+    query = getLinkSearchTerms(originalInput);
   } else {
     if (!pdfInput.files || !pdfInput.files.length) {
       alert('Primero seleccioná un archivo PDF.');
       return;
     }
     results.classList.remove('hidden');
-    resultIntro.textContent = 'Seleccionaste "' + pdfInput.files[0].name + '". Esta versión todavía no puede extraer ni analizar el texto del PDF. Copiá el contenido y pegalo en la pestaña Texto / noticia para buscar información relacionada.';
+    resultIntro.textContent = 'Seleccionaste "' + pdfInput.files[0].name + '". Esta versión todavía no puede extraer ni analizar el texto del PDF. Copiá el contenido y pegalo en la pestaña Texto / noticia.';
     sourceList.replaceChildren();
     results.scrollIntoView({behavior:'smooth', block:'start'});
     return;
   }
 
   resultIntro.textContent = mode === 'link'
-    ? 'Enlace ingresado: ' + query + '. Se generaron búsquedas para encontrar publicaciones o verificaciones relacionadas.'
-    : 'Afirmación ingresada: ' + query + '. Se generaron búsquedas para encontrar publicaciones o verificaciones relacionadas.';
+    ? 'Enlace ingresado: ' + originalInput + '. Se buscarán palabras del dominio y del nombre de la página; Verifica todavía no puede leer el artículo directamente.'
+    : 'Afirmación ingresada: ' + originalInput + '. Para evitar búsquedas demasiado largas, Verifica seleccionó estas palabras clave: "' + query + '".';
 
   sourceList.replaceChildren();
-  addSource('Chequeado', 'Buscar coincidencias en verificaciones de Chequeado.', googleSearchUrl(query, 'chequeado.com'));
-  addSource('AFP Factual', 'Buscar verificaciones publicadas por AFP.', googleSearchUrl(query, 'factual.afp.com'));
-  addSource('Reuters Fact Check', 'Buscar artículos de verificación de Reuters.', googleSearchUrl(query, 'reuters.com/fact-check'));
-  addSource('Google Fact Check Explorer', 'Buscar verificaciones relacionadas en Google Fact Check Explorer.', googleSearchUrl(query, 'toolbox.google.com/factcheck'));
-  addSource('Búsqueda general', 'Encontrar otras publicaciones y fuentes para comparar.', googleSearchUrl(query, ''));
+  addSource('Chequeado', 'Buscar estas palabras clave dentro de Chequeado.', googleSearchUrl(query, 'chequeado.com'));
+  addSource('AFP Factual', 'Buscar estas palabras clave dentro de AFP Factual.', googleSearchUrl(query, 'factcheck.afp.com'));
+  addSource('Reuters Fact Check', 'Buscar estas palabras clave dentro de Reuters.', googleSearchUrl(query, 'reuters.com'));
+  addSource('Google Fact Check Explorer', 'Buscar verificaciones relacionadas con estas palabras.', googleSearchUrl(query + ' fact check'));
+  addSource('Búsqueda general', 'Buscar información relacionada en toda la web.', googleSearchUrl(query));
 
   results.classList.remove('hidden');
   results.scrollIntoView({behavior:'smooth', block:'start'});
@@ -231,3 +263,4 @@ document.getElementById('searchButton').addEventListener('click', () => {
 </script>
 </body>
 </html>
+
