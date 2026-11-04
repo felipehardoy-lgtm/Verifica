@@ -3,73 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verifica — Prototipo</title>
+<title>Verifica — Prototipo escolar</title>
 <style>
-:root {
-  color-scheme: light dark;
-  --bg: light-dark(#f5f7fb,#0d1117);
-  --surface: light-dark(#ffffff,#161b22);
-  --surface2: light-dark(#f0f3f8,#21262d);
-  --text: light-dark(#172033,#f0f6fc);
-  --muted: light-dark(#64748b,#9da7b3);
-  --border: light-dark(#dbe2ea,#30363d);
-  --primary: light-dark(#315bea,#6f8cff);
-  --primary2: light-dark(#edf1ff,#1c2a55);
-  --shadow: 0 16px 45px rgba(20,30,55,.10);
+:root{
+  color-scheme:dark;
+  --bg:#0d1117;--surface:#161b22;--surface2:#21262d;
+  --text:#f0f6fc;--muted:#9da7b3;--border:#30363d;
+  --primary:#6f8cff;--primary2:#1c2a55;
 }
-* { box-sizing: border-box; }
-body { margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:var(--bg); color:var(--text); }
-.top { padding:22px 7vw 8px; display:flex; justify-content:space-between; align-items:center; }
-.brand { display:flex; align-items:center; gap:12px; font-weight:800; font-size:22px; letter-spacing:-.5px; }
-.logo { width:38px; height:38px; border-radius:12px; display:grid; place-items:center; background:var(--primary); color:white; font-weight:900; }
-.tag { color:var(--muted); font-size:13px; }
-.page { width:min(900px, 90vw); margin:42px auto 70px; }
-.hero { text-align:center; margin-bottom:30px; }
-.eyebrow { color:var(--primary); font-weight:800; font-size:13px; text-transform:uppercase; letter-spacing:1.3px; }
-h1 { font-size:clamp(34px,6vw,56px); line-height:1.04; margin:10px 0 13px; letter-spacing:-2px; }
-.hero p { max-width:690px; margin:auto; color:var(--muted); font-size:17px; line-height:1.6; }
-.card { background:var(--surface); border:1px solid var(--border); border-radius:24px; box-shadow:var(--shadow); }
-.workspace { padding:26px; }
-.tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
-.tab { border:1px solid var(--border); background:var(--surface); color:var(--muted); padding:10px 15px; border-radius:999px; font-weight:750; cursor:pointer; }
-.tab.active { background:var(--primary2); color:var(--primary); border-color:transparent; }
-label { display:block; font-size:14px; font-weight:750; margin-bottom:9px; }
-textarea, input { width:100%; border:1px solid var(--border); background:var(--surface); color:var(--text); border-radius:14px; padding:14px; outline:none; font:inherit; }
-textarea { min-height:170px; resize:vertical; line-height:1.55; }
-input { min-height:49px; }
-textarea:focus, input:focus { border-color:var(--primary); box-shadow:0 0 0 3px var(--primary2); }
-.actions { display:flex; gap:10px; margin-top:16px; }
-button.primary { border:0; background:var(--primary); color:white; border-radius:13px; padding:13px 18px; font-weight:800; flex:1; cursor:pointer; }
-button.secondary { border:1px solid var(--border); background:var(--surface); color:var(--text); border-radius:13px; padding:11px 15px; font-weight:700; cursor:pointer; }
-.note { margin-top:18px; padding:14px; border-radius:14px; background:var(--surface2); color:var(--muted); font-size:13px; line-height:1.55; }
-.hidden { display:none !important; }
-.results { margin-top:22px; }
-.results h2 { font-size:21px; margin:0 0 8px; }
-.results p { color:var(--muted); line-height:1.5; }
-.source-list { display:grid; gap:10px; margin-top:16px; }
-.source { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:15px; border:1px solid var(--border); border-radius:15px; background:var(--surface); }
-.source b { display:block; margin-bottom:4px; }
-.source span { color:var(--muted); font-size:13px; line-height:1.4; }
-.source a { color:var(--primary); font-weight:750; text-decoration:none; white-space:nowrap; }
-.source a:hover { text-decoration:underline; }
-.footer-note { color:var(--muted); text-align:center; font-size:12px; margin-top:25px; line-height:1.5; }
-.steps { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:22px; }
-.step { padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:18px; }
-.step strong { display:block; margin-bottom:6px; }
-.step p { margin:0; color:var(--muted); font-size:13px; line-height:1.45; }
-@media(max-width:700px) {
- .top { padding:18px 5vw; }
- .page { width:92vw; margin-top:28px; }
- .workspace { padding:18px; }
- .steps { grid-template-columns:1fr; }
- .actions { flex-direction:column; }
- .source { align-items:flex-start; flex-direction:column; }
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+.top{padding:22px 7vw 8px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:22px}
+.logo{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--primary);color:white;font-weight:900}
+.tag{color:var(--muted);font-size:13px}
+.page{width:min(1000px,90vw);margin:35px auto 65px}
+.hero{text-align:center;margin-bottom:28px}
+.eyebrow{color:var(--primary);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1.2px}
+h1{font-size:clamp(32px,5vw,50px);line-height:1.08;margin:10px 0 12px;letter-spacing:-1.5px}
+.hero p{max-width:720px;margin:auto;color:var(--muted);font-size:16px;line-height:1.6}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:24px}
+.workspace{padding:26px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tab{border:1px solid var(--border);background:var(--surface);color:var(--muted);padding:10px 15px;border-radius:999px;font-weight:750;cursor:pointer}
+.tab.active{background:var(--primary2);color:var(--primary);border-color:transparent}
+label{display:block;font-size:14px;font-weight:750;margin-bottom:9px}
+textarea,input[type=url]{width:100%;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:14px;padding:14px;outline:none;font:inherit}
+textarea{min-height:170px;resize:vertical;line-height:1.55}
+input[type=url]{min-height:49px}
+textarea:focus,input:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary2)}
+.actions{display:flex;gap:10px;margin-top:16px}
+button.primary{border:0;background:var(--primary);color:white;border-radius:13px;padding:13px 18px;font-weight:800;flex:1;cursor:pointer}
+button.secondary{border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:13px;padding:11px 15px;font-weight:700;cursor:pointer}
+button:hover{filter:brightness(1.08)}
+.note{margin-top:18px;padding:14px;border-radius:14px;background:var(--surface2);color:var(--muted);font-size:13px;line-height:1.55}
+.hidden{display:none!important}
+.results{margin-top:22px;padding:22px;background:var(--surface2);border:1px solid var(--border);border-radius:18px}
+.results h2{font-size:21px;margin:0 0 8px}
+.results p{line-height:1.5}
+.status{font-size:21px;font-weight:850;color:#f0c674;margin:0 0 12px}
+.source-list{display:grid;gap:10px;margin-top:16px}
+.source{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px;border:1px solid var(--border);border-radius:15px;background:var(--surface)}
+.source b{display:block;margin-bottom:5px}
+.source span{color:var(--muted);font-size:13px;line-height:1.4}
+.source a{color:var(--primary);font-weight:750;text-decoration:none;white-space:nowrap}
+.source a:hover{text-decoration:underline}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.step{padding:18px;background:var(--surface);border:1px solid var(--border);border-radius:18px}
+.step strong{display:block;margin-bottom:6px}
+.step p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+.footer-note{color:var(--muted);text-align:center;font-size:12px;margin-top:25px;line-height:1.5}
+.file-help{color:var(--muted);font-size:13px;margin-top:10px}
+@media(max-width:700px){
+ .top{padding:18px 5vw}.page{width:92vw;margin-top:25px}
+ .workspace{padding:18px}.steps{grid-template-columns:1fr}
+ .actions{flex-direction:column}.source{align-items:flex-start;flex-direction:column}
 }
 </style>
 </head>
 <body>
 <header class="top">
-  <div class="brand"><div class="logo">✓</div> Verifica</div>
+  <div class="brand"><div class="logo">✓</div>Verifica</div>
   <div class="tag">Prototipo escolar</div>
 </header>
 
@@ -77,22 +71,29 @@ button.secondary { border:1px solid var(--border); background:var(--surface); co
   <section class="hero">
     <div class="eyebrow">Antes de compartir, verificá</div>
     <h1>¿Qué información<br>querés comprobar?</h1>
-    <p>Escribí una afirmación o pegá un enlace. Verifica te ayudará a buscar si organizaciones de verificación ya investigaron el tema.</p>
+    <p>Ingresá una afirmación, un enlace o un documento. Verifica te ayuda a encontrar búsquedas relacionadas en fuentes de verificación y otros sitios.</p>
   </section>
 
   <section class="card workspace">
     <div class="tabs" aria-label="Tipo de contenido">
       <button class="tab active" id="textTab" type="button" aria-pressed="true">Texto / noticia</button>
       <button class="tab" id="linkTab" type="button" aria-pressed="false">🔗 Link</button>
+      <button class="tab" id="pdfTab" type="button" aria-pressed="false">📄 PDF</button>
     </div>
 
     <div id="textMode">
       <label for="claim">Información a verificar</label>
-      <textarea id="claim" placeholder="Pegá una noticia, publicación o afirmación que quieras investigar..."></textarea>
+      <textarea id="claim" placeholder="Pegá acá una noticia, publicación o afirmación..."></textarea>
     </div>
     <div id="linkMode" class="hidden">
       <label for="url">Enlace de la publicación</label>
       <input id="url" type="url" placeholder="https://...">
+      <p class="file-help">Pegá el enlace completo de la publicación que querés investigar.</p>
+    </div>
+    <div id="pdfMode" class="hidden">
+      <label for="pdfFile">Seleccionar documento PDF</label>
+      <input id="pdfFile" type="file" accept="application/pdf,.pdf">
+      <p class="file-help">En esta versión todavía no podemos leer automáticamente el contenido del PDF. Podés copiar el texto del documento y pegarlo en la pestaña Texto / noticia.</p>
     </div>
 
     <div class="actions">
@@ -100,60 +101,65 @@ button.secondary { border:1px solid var(--border); background:var(--surface); co
       <button class="primary" id="searchButton" type="button">Buscar verificaciones</button>
     </div>
 
-    <div id="results" class="results hidden" aria-live="polite">
-      <h2>Búsquedas en fuentes de verificación</h2>
-      <p id="searchedText"></p>
+    <section id="results" class="results hidden" aria-live="polite">
+      <div class="status">Información pendiente de verificación</div>
+      <p id="resultIntro"></p>
+      <h2>Fuentes para consultar</h2>
       <div class="source-list" id="sourceList"></div>
-      <div class="note">
-        <b>Importante:</b> estos enlaces abren búsquedas reales en los sitios indicados. Verifica no determina automáticamente si una noticia es verdadera o falsa. Revisá la fecha, el autor, las pruebas y si otras fuentes independientes coinciden.
-      </div>
-    </div>
+      <div class="note"><b>Importante:</b> estos enlaces abren búsquedas relacionadas con el texto ingresado. Verifica no consulta directamente las bases de datos de estas organizaciones ni determina automáticamente si una afirmación es verdadera o falsa. Revisá las fechas, las pruebas, el autor y si varias fuentes independientes coinciden.</div>
+    </section>
   </section>
 
   <section class="steps">
-    <div class="step"><strong>1. Ingresar</strong><p>Escribí una afirmación o pegá el enlace de una publicación.</p></div>
-    <div class="step"><strong>2. Buscar</strong><p>Consultá verificaciones publicadas por organizaciones reconocidas.</p></div>
-    <div class="step"><strong>3. Comparar</strong><p>Leé las fuentes y compará sus pruebas antes de sacar una conclusión.</p></div>
+    <div class="step"><strong>1. Recibir</strong><p>El usuario pega un link, texto o selecciona un documento.</p></div>
+    <div class="step"><strong>2. Comparar</strong><p>Se buscan coincidencias en fuentes de verificación y otros sitios.</p></div>
+    <div class="step"><strong>3. Explicar</strong><p>Se muestran búsquedas para que el usuario compare la información y sus pruebas.</p></div>
   </section>
 
-  <div class="footer-note">Verifica es una herramienta de ayuda para investigar información. Las búsquedas pueden no encontrar resultados y no reemplazan la revisión de fuentes originales.</div>
+  <div class="footer-note">Verifica es una herramienta de ayuda para investigar información. Una búsqueda sin resultados no significa que una afirmación sea verdadera o falsa.</div>
 </main>
 
 <script>
 const textTab = document.getElementById('textTab');
 const linkTab = document.getElementById('linkTab');
+const pdfTab = document.getElementById('pdfTab');
 const textMode = document.getElementById('textMode');
 const linkMode = document.getElementById('linkMode');
+const pdfMode = document.getElementById('pdfMode');
 const claimInput = document.getElementById('claim');
 const urlInput = document.getElementById('url');
+const pdfInput = document.getElementById('pdfFile');
 const results = document.getElementById('results');
-const searchedText = document.getElementById('searchedText');
+const resultIntro = document.getElementById('resultIntro');
 const sourceList = document.getElementById('sourceList');
 let mode = 'text';
 
 function setMode(nextMode) {
   mode = nextMode;
-  const isText = mode === 'text';
-  textMode.classList.toggle('hidden', !isText);
-  linkMode.classList.toggle('hidden', isText);
-  textTab.classList.toggle('active', isText);
-  linkTab.classList.toggle('active', !isText);
-  textTab.setAttribute('aria-pressed', String(isText));
-  linkTab.setAttribute('aria-pressed', String(!isText));
+  textMode.classList.toggle('hidden', mode !== 'text');
+  linkMode.classList.toggle('hidden', mode !== 'link');
+  pdfMode.classList.toggle('hidden', mode !== 'pdf');
+  textTab.classList.toggle('active', mode === 'text');
+  linkTab.classList.toggle('active', mode === 'link');
+  pdfTab.classList.toggle('active', mode === 'pdf');
+  textTab.setAttribute('aria-pressed', String(mode === 'text'));
+  linkTab.setAttribute('aria-pressed', String(mode === 'link'));
+  pdfTab.setAttribute('aria-pressed', String(mode === 'pdf'));
   results.classList.add('hidden');
 }
 textTab.addEventListener('click', () => setMode('text'));
 linkTab.addEventListener('click', () => setMode('link'));
+pdfTab.addEventListener('click', () => setMode('pdf'));
 
 document.getElementById('exampleButton').addEventListener('click', () => {
   setMode('text');
-  claimInput.value = 'Argentina ganó la Copa Mundial de Fútbol de 2022.';
+  claimInput.value = 'URGENTE: científicos confirmaron que tomar agua con limón elimina todos los virus del cuerpo. Compartí antes de que borren esta publicación.';
   claimInput.focus();
 });
 
-function makeSearchUrl(query, site) {
-  const fullQuery = site ? `site:${site} ${query}` : query;
-  return 'https://www.google.com/search?q=' + encodeURIComponent(fullQuery);
+function googleSearchUrl(query, site) {
+  const searchText = site ? `site:${site} ${query}` : query;
+  return 'https://www.google.com/search?q=' + encodeURIComponent(searchText);
 }
 
 function addSource(name, description, url) {
@@ -165,38 +171,63 @@ function addSource(name, description, url) {
   const detail = document.createElement('span');
   detail.textContent = description;
   info.append(title, detail);
-  const link = document.createElement('a');
-  link.href = url;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  link.textContent = 'Buscar ↗';
-  card.append(info, link);
+  const anchor = document.createElement('a');
+  anchor.href = url;
+  anchor.target = '_blank';
+  anchor.rel = 'noopener noreferrer';
+  anchor.textContent = 'Buscar información ↗';
+  card.append(info, anchor);
   sourceList.append(card);
 }
 
 document.getElementById('searchButton').addEventListener('click', () => {
-  const raw = mode === 'text' ? claimInput.value.trim() : urlInput.value.trim();
-  if (!raw) {
-    alert(mode === 'text' ? 'Primero escribí una afirmación o noticia.' : 'Primero pegá un enlace.');
+  let query = '';
+
+  if (mode === 'text') {
+    query = claimInput.value.trim();
+    if (!query) {
+      alert('Primero pegá una noticia o afirmación.');
+      return;
+    }
+  } else if (mode === 'link') {
+    query = urlInput.value.trim();
+    if (!query) {
+      alert('Primero pegá un enlace.');
+      return;
+    }
+    try {
+      const parsed = new URL(query);
+      if (!['http:', 'https:'].includes(parsed.protocol)) throw new Error('URL no válida');
+    } catch {
+      alert('Ingresá un enlace válido que comience con https:// o http://');
+      return;
+    }
+  } else {
+    if (!pdfInput.files || !pdfInput.files.length) {
+      alert('Primero seleccioná un archivo PDF.');
+      return;
+    }
+    results.classList.remove('hidden');
+    resultIntro.textContent = 'Seleccionaste "' + pdfInput.files[0].name + '". Esta versión todavía no puede extraer ni analizar el texto del PDF. Copiá el contenido y pegalo en la pestaña Texto / noticia para buscar información relacionada.';
+    sourceList.replaceChildren();
+    results.scrollIntoView({behavior:'smooth', block:'start'});
     return;
   }
 
-  const query = mode === 'link' ? raw : raw;
-  searchedText.textContent = mode === 'link'
-    ? 'Enlace ingresado: ' + raw
-    : 'Afirmación ingresada: ' + raw;
+  resultIntro.textContent = mode === 'link'
+    ? 'Enlace ingresado: ' + query + '. Se generaron búsquedas para encontrar publicaciones o verificaciones relacionadas.'
+    : 'Afirmación ingresada: ' + query + '. Se generaron búsquedas para encontrar publicaciones o verificaciones relacionadas.';
 
   sourceList.replaceChildren();
-  addSource('Chequeado', 'Buscar notas de verificación de Chequeado.', makeSearchUrl(query, 'chequeado.com'));
-  addSource('AFP Factual', 'Buscar verificaciones publicadas por AFP.', makeSearchUrl(query, 'factual.afp.com'));
-  addSource('Reuters Fact Check', 'Buscar verificaciones publicadas por Reuters.', makeSearchUrl(query, 'reuters.com'));
-  addSource('Google Fact Check Explorer', 'Buscar verificaciones registradas en el explorador de Google.', 'https://toolbox.google.com/factcheck/explorer/search/' + encodeURIComponent(query));
-  addSource('Búsqueda general', 'Comparar con otras fuentes y publicaciones originales.', makeSearchUrl(query, ''));
+  addSource('Chequeado', 'Buscar coincidencias en verificaciones de Chequeado.', googleSearchUrl(query, 'chequeado.com'));
+  addSource('AFP Factual', 'Buscar verificaciones publicadas por AFP.', googleSearchUrl(query, 'factual.afp.com'));
+  addSource('Reuters Fact Check', 'Buscar artículos de verificación de Reuters.', googleSearchUrl(query, 'reuters.com/fact-check'));
+  addSource('Google Fact Check Explorer', 'Buscar verificaciones relacionadas en Google Fact Check Explorer.', googleSearchUrl(query, 'toolbox.google.com/factcheck'));
+  addSource('Búsqueda general', 'Encontrar otras publicaciones y fuentes para comparar.', googleSearchUrl(query, ''));
 
   results.classList.remove('hidden');
-  results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  results.scrollIntoView({behavior:'smooth', block:'start'});
 });
 </script>
 </body>
 </html>
-
